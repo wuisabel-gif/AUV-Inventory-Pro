@@ -19,11 +19,22 @@ const CAT_COLORS = {
 };
 const catColor = (c) => CAT_COLORS[c] || '#7fa6c9';
 
+// Sourcing status, inferred from the BOM fields (see the spreadsheet Legend):
+// a link to a live Digi-Key product page = verified; a manufacturer part number
+// without a detail link = standard numbering to confirm; nothing = needs lookup.
+function sourcing(item) {
+  if ((item.dkLink || '').includes('/products/detail/')) return { key: 'verified', label: 'Verified', color: 'var(--good)' };
+  if (item.mfrPart) return { key: 'std', label: 'Confirm stock', color: 'var(--warn)' };
+  if (item.dkLink || /needs confirmation/i.test(item.notes || '')) return { key: 'check', label: 'Needs confirm', color: 'var(--danger)' };
+  return null;
+}
+
 let db = { categories: [], items: [], lastUpdated: null };
 let activeCategory = 'All'; // 'All' or a category name
 let query = '';
 let sortMode = 'value';
 let lowStockOnly = false;
+let sourcingFilter = 'all';
 
 // ---- helpers -------------------------------------------------------------
 
@@ -38,7 +49,7 @@ function escapeHtml(s) {
 // "0402 0.1uf" matches "0.1uF 0402".
 function matches(item, terms) {
   if (!terms.length) return true;
-  const hay = `${item.category} ${item.value} ${item.package} ${item.location} ${item.notes}`.toLowerCase();
+  const hay = `${item.category} ${item.value} ${item.package} ${item.location} ${item.notes} ${item.mfrPart || ''} ${item.dkPart || ''}`.toLowerCase();
   return terms.every((t) => hay.includes(t));
 }
 
@@ -83,6 +94,10 @@ function visibleItems() {
   let items = db.items.filter((i) => {
     if (activeCategory !== 'All' && i.category !== activeCategory) return false;
     if (lowStockOnly && !isLow(i)) return false;
+    if (sourcingFilter !== 'all') {
+      const s = sourcing(i);
+      if ((s ? s.key : 'none') !== sourcingFilter) return false;
+    }
     return matches(i, terms);
   });
 
@@ -158,13 +173,18 @@ function renderRows(items, terms) {
         : isLow(i)
         ? '<span class="low-badge">LOW</span>'
         : '';
+      const src = sourcing(i);
       return `
       <tr data-id="${i.id}" style="--c:${catColor(i.category)}">
         <td><span class="tag"><span class="dot"></span>${escapeHtml(i.category)}</span></td>
         <td class="val-cell">${highlight(i.value, terms) || '<span class="muted">—</span>'}</td>
         <td class="pkg-cell">${i.package ? `<span class="pkg-chip">${highlight(i.package, terms)}</span>` : '<span class="muted">—</span>'}</td>
-        <td class="muted">${i.location ? highlight(i.location, terms) : '—'}</td>
-        <td class="muted">${i.notes ? highlight(i.notes, terms) : '—'}</td>
+        <td class="mfr-cell">${
+          i.mfrPart
+            ? `<span class="mfr-part">${highlight(i.mfrPart, terms)}</span>`
+            : '<span class="muted">—</span>'
+        }${src ? `<span class="src-badge" style="--c:${src.color}" title="${src.label}">${src.label}</span>` : ''}</td>
+        <td class="muted notes-cell">${i.notes ? highlight(i.notes, terms) : '—'}</td>
         <td class="col-qty">
           <div class="qty-control">
             <button class="step" data-act="dec" title="Remove one">−</button>
@@ -174,7 +194,10 @@ function renderRows(items, terms) {
           </div>
         </td>
         <td class="col-act">
-          <button class="row-act" data-act="edit" title="Edit">✎</button>
+          <div class="row-acts">
+            ${i.dkLink ? '<button class="row-act" data-act="link" title="Open Digi-Key page">↗</button>' : ''}
+            <button class="row-act" data-act="edit" title="Edit">✎</button>
+          </div>
         </td>
       </tr>`;
     })
@@ -182,9 +205,12 @@ function renderRows(items, terms) {
 
   tbody.querySelectorAll('tr').forEach((tr) => {
     const id = tr.dataset.id;
+    const item = db.items.find((x) => x.id === id);
     tr.querySelector('[data-act="inc"]').addEventListener('click', () => adjust(id, +1));
     tr.querySelector('[data-act="dec"]').addEventListener('click', () => adjust(id, -1));
     tr.querySelector('[data-act="edit"]').addEventListener('click', () => openModal(id));
+    const link = tr.querySelector('[data-act="link"]');
+    if (link) link.addEventListener('click', () => window.inventory.openLink(item.dkLink));
   });
 }
 
@@ -233,6 +259,9 @@ function openModal(id) {
   $('#f-threshold').value = item ? (item.lowStockThreshold ?? 0) : 0;
   $('#f-location').value = item ? item.location : '';
   $('#f-notes').value = item ? item.notes : '';
+  $('#f-mfrPart').value = item ? item.mfrPart || '' : '';
+  $('#f-dkPart').value = item ? item.dkPart || '' : '';
+  $('#f-dkLink').value = item ? item.dkLink || '' : '';
   $('#f-delete').hidden = !editing;
   $('#modal').hidden = false;
   setTimeout(() => $('#f-value').focus(), 30);
@@ -253,6 +282,9 @@ async function saveFromModal(e) {
     lowStockThreshold: parseInt($('#f-threshold').value, 10) || 0,
     location: $('#f-location').value.trim(),
     notes: $('#f-notes').value.trim(),
+    mfrPart: $('#f-mfrPart').value.trim(),
+    dkPart: $('#f-dkPart').value.trim(),
+    dkLink: $('#f-dkLink').value.trim(),
   };
   if (!payload.value) {
     toast('Value is required.');
@@ -306,6 +338,10 @@ function init() {
     lowStockOnly = e.target.checked;
     render();
   });
+  $('#sourcing-filter').addEventListener('change', (e) => {
+    sourcingFilter = e.target.value;
+    render();
+  });
 
   $('#btn-add').addEventListener('click', () => openModal(null));
   $('#f-cancel').addEventListener('click', closeModal);
@@ -333,6 +369,51 @@ function init() {
   });
   $('#btn-reveal').addEventListener('click', () => window.inventory.revealData());
 
+  // ---- Google Sheets sync ----
+  async function openSyncModal() {
+    const s = await window.sheets.getSettings();
+    $('#s-url').value = s.sheetUrl || '';
+    $('#s-token').value = s.sheetToken || '';
+    $('#sync-status').className = 'sync-status';
+    $('#sync-status').textContent = s.lastSync
+      ? 'Last synced ' + new Date(s.lastSync).toLocaleString()
+      : 'Not synced yet.';
+    $('#sync-modal').hidden = false;
+    setTimeout(() => $('#s-url').focus(), 30);
+  }
+  async function saveSyncSettings() {
+    await window.sheets.saveSettings({ sheetUrl: $('#s-url').value, sheetToken: $('#s-token').value });
+  }
+  async function runSync() {
+    await saveSyncSettings();
+    const status = $('#sync-status');
+    const btn = $('#s-sync');
+    status.className = 'sync-status busy';
+    status.textContent = 'Syncing…';
+    btn.disabled = true;
+    const r = await window.sheets.sync();
+    btn.disabled = false;
+    if (r.ok) {
+      status.className = 'sync-status ok';
+      status.textContent = `Synced ${r.count} parts to Google Sheets ✓`;
+      toast(`Synced ${r.count} parts to Google Sheets`);
+    } else {
+      status.className = 'sync-status err';
+      status.textContent = r.error || 'Sync failed.';
+    }
+  }
+  $('#btn-sync').addEventListener('click', openSyncModal);
+  $('#s-cancel').addEventListener('click', () => ($('#sync-modal').hidden = true));
+  $('#s-save').addEventListener('click', async () => {
+    await saveSyncSettings();
+    toast('Sync settings saved');
+    $('#sync-modal').hidden = true;
+  });
+  $('#s-sync').addEventListener('click', runSync);
+  $('#sync-modal').addEventListener('click', (e) => {
+    if (e.target.id === 'sync-modal') $('#sync-modal').hidden = true;
+  });
+
   document.addEventListener('keydown', (e) => {
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
       e.preventDefault();
@@ -340,6 +421,7 @@ function init() {
       $('#search').select();
     } else if (e.key === 'Escape') {
       if (!$('#modal').hidden) closeModal();
+      if (!$('#sync-modal').hidden) $('#sync-modal').hidden = true;
     } else if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'n') {
       e.preventDefault();
       openModal(null);

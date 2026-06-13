@@ -18,6 +18,7 @@ const fs = require('fs');
 
 const DATA_DIR = app.getPath('userData');
 const DB_PATH = path.join(DATA_DIR, 'inventory.json');
+const SETTINGS_PATH = path.join(DATA_DIR, 'settings.json');
 const BACKUP_DIR = path.join(DATA_DIR, 'backups');
 const SEED_PATH = path.join(__dirname, 'data', 'seed.json');
 
@@ -64,6 +65,10 @@ function normalizeItem(raw) {
       Number.isFinite(+raw.lowStockThreshold) ? Math.max(0, Math.round(+raw.lowStockThreshold)) : 0,
     location: (raw.location || '').toString().trim(),
     notes: (raw.notes || '').toString().trim(),
+    // Manufacturing / sourcing info (Digi-Key BOM).
+    mfrPart: (raw.mfrPart || '').toString().trim(),
+    dkPart: (raw.dkPart || '').toString().trim(),
+    dkLink: (raw.dkLink || '').toString().trim(),
     updatedAt: raw.updatedAt || nowIso(),
   };
 }
@@ -156,10 +161,102 @@ function writeDb(db) {
 }
 
 // ---------------------------------------------------------------------------
+// Settings (Google Sheets sync config) — kept in a separate file from the
+// inventory data so the secret token never lands in an exported inventory.
+// ---------------------------------------------------------------------------
+
+function loadSettings() {
+  try {
+    if (fs.existsSync(SETTINGS_PATH)) return JSON.parse(fs.readFileSync(SETTINGS_PATH, 'utf8'));
+  } catch (err) {
+    console.error('Failed to read settings:', err);
+  }
+  return { sheetUrl: '', sheetToken: '', lastSync: null };
+}
+
+function saveSettings(s) {
+  ensureDirs();
+  const tmp = SETTINGS_PATH + '.tmp';
+  fs.writeFileSync(tmp, JSON.stringify(s, null, 2), 'utf8');
+  fs.renameSync(tmp, SETTINGS_PATH);
+  return s;
+}
+
+// Push the whole inventory to the team's Google Apps Script web app.
+async function syncToSheets() {
+  const settings = loadSettings();
+  if (!settings.sheetUrl) return { ok: false, error: 'No Google Sheets URL configured.' };
+
+  const db = loadDb();
+  const payload = {
+    token: settings.sheetToken || '',
+    syncedAt: nowIso(),
+    items: db.items.map((i) => ({
+      category: i.category,
+      value: i.value,
+      package: i.package,
+      quantity: i.quantity,
+      location: i.location,
+      notes: i.notes,
+      updatedAt: i.updatedAt,
+    })),
+  };
+
+  let res;
+  try {
+    res = await fetch(settings.sheetUrl, {
+      method: 'POST',
+      // text/plain avoids a CORS preflight against the Apps Script endpoint;
+      // the script reads the raw request body regardless of content type.
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload),
+      redirect: 'follow',
+    });
+  } catch (err) {
+    return { ok: false, error: 'Network error: ' + err.message };
+  }
+
+  const text = await res.text();
+  let data;
+  try {
+    data = JSON.parse(text);
+  } catch {
+    // Show what actually came back — usually an HTML login/error page, which
+    // tells us the deployment access or version is wrong.
+    const looksLikeLogin = /sign in|accounts\.google|ServiceLogin/i.test(text);
+    const snippet = text.replace(/\s+/g, ' ').trim().slice(0, 160);
+    return {
+      ok: false,
+      error:
+        'Got HTTP ' +
+        res.status +
+        ' but not JSON. ' +
+        (looksLikeLogin
+          ? 'The response is a Google sign-in page → set "Who has access" to "Anyone" (not "Anyone with Google account") and redeploy.'
+          : 'Response started with: "' + snippet + '"'),
+    };
+  }
+  if (!data.ok) return { ok: false, error: data.error || 'The script reported an error.' };
+
+  settings.lastSync = payload.syncedAt;
+  saveSettings(settings);
+  return { ok: true, count: data.count, lastSync: settings.lastSync };
+}
+
+// ---------------------------------------------------------------------------
 // IPC handlers
 // ---------------------------------------------------------------------------
 
 ipcMain.handle('inventory:get', () => loadDb());
+
+ipcMain.handle('settings:get', () => loadSettings());
+ipcMain.handle('settings:save', (_e, { sheetUrl, sheetToken }) => {
+  const s = loadSettings();
+  if (typeof sheetUrl === 'string') s.sheetUrl = sheetUrl.trim();
+  if (typeof sheetToken === 'string') s.sheetToken = sheetToken.trim();
+  return saveSettings(s);
+});
+ipcMain.handle('sheets:sync', () => syncToSheets());
 
 ipcMain.handle('inventory:add', (_e, raw) => {
   const db = loadDb();
@@ -197,6 +294,11 @@ ipcMain.handle('inventory:delete', (_e, id) => {
 
 ipcMain.handle('inventory:dataDir', () => DATA_DIR);
 ipcMain.handle('inventory:revealData', () => shell.showItemInFolder(DB_PATH));
+
+// Open a part's Digi-Key link in the default browser (http/https only).
+ipcMain.handle('inventory:openLink', (_e, url) => {
+  if (typeof url === 'string' && /^https?:\/\//i.test(url)) shell.openExternal(url);
+});
 
 ipcMain.handle('inventory:export', async () => {
   const db = loadDb();
@@ -274,6 +376,16 @@ function createWindow() {
               `document.querySelector('.cat[data-cat="${process.env.AUV_CLICK}"]')?.click(); document.querySelectorAll('#rows tr').length`
             );
             await new Promise((r) => setTimeout(r, 300));
+          }
+          if (process.env.AUV_OPEN) {
+            for (const sel of process.env.AUV_OPEN.split(',')) {
+              await win.webContents.executeJavaScript(`document.querySelector('${sel.trim()}')?.click(); true`);
+              await new Promise((r) => setTimeout(r, 450));
+            }
+          }
+          if (process.env.AUV_EVAL) {
+            await win.webContents.executeJavaScript(process.env.AUV_EVAL);
+            await new Promise((r) => setTimeout(r, 350));
           }
           const img = await win.webContents.capturePage();
           fs.writeFileSync(process.env.AUV_SHOT, img.toPNG());

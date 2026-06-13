@@ -28,10 +28,21 @@
         <nav class="cats" id="cats"></nav>
 
         <div class="sidebar-foot">
-          <button class="ghost-btn" id="btn-export-json">Export JSON</button>
-          <button class="ghost-btn" id="btn-export-csv">Export CSV</button>
-          <button class="ghost-btn" id="btn-import">Import JSON…</button>
-          <button class="ghost-btn" id="btn-reveal">Show data file</button>
+          <button class="sync-btn" id="btn-sync">
+            <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+              <path d="M7 17a5 5 0 0 1-1-9.9A6 6 0 0 1 18 8h.5a3.5 3.5 0 0 1 0 7H7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+              <path d="M12 11v5m0 0-2-2m2 2 2-2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Sync to Sheets</span>
+          </button>
+          <div class="foot-row">
+            <button class="ghost-btn" id="btn-export-json">Export JSON</button>
+            <button class="ghost-btn" id="btn-export-csv">Export CSV</button>
+          </div>
+          <div class="foot-row">
+            <button class="ghost-btn" id="btn-import">Import…</button>
+            <button class="ghost-btn" id="btn-reveal">Data file</button>
+          </div>
           <div class="updated" id="updated"></div>
         </div>
       </aside>
@@ -51,6 +62,13 @@
             <label class="lowstock-toggle">
               <input type="checkbox" id="lowstock-only" /> <span>Low stock only</span>
             </label>
+            <select id="sourcing-filter" title="Filter by sourcing status">
+              <option value="all">Sourcing: All</option>
+              <option value="verified">✓ Verified</option>
+              <option value="std">Confirm stock</option>
+              <option value="check">Needs confirm</option>
+              <option value="none">Not sourced</option>
+            </select>
             <select id="sort">
               <option value="value">Sort: Value</option>
               <option value="qty-desc">Sort: Qty (high→low)</option>
@@ -71,7 +89,7 @@
                 <th class="col-cat">Category</th>
                 <th class="col-val">Value</th>
                 <th class="col-pkg">Package</th>
-                <th class="col-loc">Location</th>
+                <th class="col-mfr">Mfr Part #</th>
                 <th class="col-notes">Notes</th>
                 <th class="col-qty">Qty</th>
                 <th class="col-act"></th>
@@ -123,7 +141,22 @@
           </div>
           <div class="field">
             <label for="f-notes">Notes</label>
-            <input id="f-notes" type="text" placeholder="part number, voltage rating, etc." />
+            <input id="f-notes" type="text" placeholder="dielectric, voltage rating, status, etc." />
+          </div>
+          <div class="field-section">Manufacturing / sourcing</div>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-mfrPart">Manufacturer part #</label>
+              <input id="f-mfrPart" type="text" placeholder="e.g. GRM155R71H104KE14D" spellcheck="false" />
+            </div>
+            <div class="field">
+              <label for="f-dkPart">Digi-Key part #</label>
+              <input id="f-dkPart" type="text" placeholder="e.g. 490-1303-1-ND" spellcheck="false" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-dkLink">Digi-Key link</label>
+            <input id="f-dkLink" type="text" placeholder="https://www.digikey.com/…" spellcheck="false" />
           </div>
           <div class="modal-actions">
             <button type="button" class="danger-btn" id="f-delete" hidden>Delete</button>
@@ -132,6 +165,33 @@
             <button type="submit" class="primary-btn" id="f-save">Save</button>
           </div>
         </form>
+      </div>
+    </div>
+
+    <!-- Google Sheets sync modal -->
+    <div class="modal-backdrop" id="sync-modal" hidden>
+      <div class="modal" role="dialog" aria-modal="true">
+        <h2>Sync to Google Sheets</h2>
+        <p class="modal-hint">
+          Paste the <strong>web app URL</strong> and <strong>token</strong> from your Apps Script
+          deployment. Syncing overwrites the Sheet's <code>Inventory</code> tab with the current
+          parts list. One-time setup steps are in <code>google-apps-script/README.md</code>.
+        </p>
+        <div class="field">
+          <label for="s-url">Web app URL</label>
+          <input id="s-url" type="text" placeholder="https://script.google.com/macros/s/…/exec" spellcheck="false" />
+        </div>
+        <div class="field">
+          <label for="s-token">Shared token</label>
+          <input id="s-token" type="text" placeholder="the secret you set in the script" spellcheck="false" />
+        </div>
+        <div class="sync-status" id="sync-status"></div>
+        <div class="modal-actions">
+          <span class="spacer"></span>
+          <button type="button" class="ghost-btn" id="s-cancel">Close</button>
+          <button type="button" class="ghost-btn" id="s-save">Save</button>
+          <button type="button" class="primary-btn" id="s-sync">Save &amp; Sync now</button>
+        </div>
       </div>
     </div>
 

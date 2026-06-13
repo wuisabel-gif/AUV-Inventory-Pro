@@ -41,8 +41,15 @@ npm run dist         # current platform
   its threshold. The threshold defaults to **0** (alert only when out of stock);
   raise it per-part for an early warning. The "Low stock only" toggle filters to
   just those parts.
+- **Manufacturing / sourcing** — each part can carry a manufacturer part #,
+  Digi-Key part #, and a Digi-Key link (the ↗ button opens it in your browser).
+  A status badge is inferred from the data: **Verified** (links to a live
+  Digi-Key product page), **Confirm stock** (manufacturer part # filled via the
+  documented numbering scheme), or **Needs confirm** (value/voltage ambiguous).
 - **Sort** by value, quantity, package, or recently updated.
 - **Export / Import** — JSON (full backup/restore) and CSV (for spreadsheets).
+- **Sync to Google Sheets** — push the current inventory to a shared team Sheet
+  with one click (see below).
 
 ## How data is stored
 
@@ -76,7 +83,10 @@ Each part record:
   "quantity": 1,
   "lowStockThreshold": 0,
   "location": "",
-  "notes": "",
+  "notes": "Samsung X7R ±10% 16V.",
+  "mfrPart": "CL05B104KO5NNNC",
+  "dkPart": "1276-1001-1-ND",
+  "dkLink": "https://www.digikey.com/en/products/detail/…",
   "updatedAt": "2026-06-12T…Z"
 }
 ```
@@ -91,6 +101,23 @@ JSON makes this easy. Either:
 If you later outgrow a single shared file (concurrent editors, audit history),
 the natural next step is a small hosted database — but for the current scale,
 JSON + git is the lower-maintenance choice.
+
+## Sync to Google Sheets
+
+The **Sync to Sheets** button pushes the current inventory into a shared Google
+Sheet so the whole team can view it. It's **one-way** (app → Sheet): syncing
+overwrites the Sheet's `Inventory` tab with the app's current parts list.
+
+It uses a tiny **Google Apps Script web app** — no Google Cloud project, OAuth
+libraries, or key files; just a URL and a shared token. The one-time (~5 min)
+setup is in [`google-apps-script/README.md`](google-apps-script/README.md);
+the script itself is [`google-apps-script/Code.gs`](google-apps-script/Code.gs).
+Once deployed, paste the web app URL + token into the app's **Sync to Sheets**
+dialog and click **Save & Sync now**.
+
+The URL and token are stored locally in `settings.json` (next to
+`inventory.json`), separate from the inventory data so the token never ends up
+in an exported file.
 
 ## Seeding from the original spreadsheet
 
@@ -110,4 +137,5 @@ src/style.css    Theme + @font-face for the ALK Rounded typeface
 src/renderer.js  UI logic — search, filter, sort, modal, quantity edits
 src/fonts/       Bundled team typeface
 data/seed.json   Initial inventory parsed from the xlsx
+google-apps-script/   Code.gs + setup guide for the Google Sheets sync endpoint
 ```

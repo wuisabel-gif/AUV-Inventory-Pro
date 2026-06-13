@@ -15,448 +15,640 @@
       "value": "0.018uF",
       "package": "0402",
       "quantity": 1,
-      "notes": ""
+      "notes": "X7R +/-10% 50V (18nF). Per Murata numbering - confirm stock.",
+      "mfrPart": "GRM155R71H183KA12D",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=GRM155R71H183KA12D"
     },
     {
       "category": "Capacitors",
       "value": "0.039uF",
       "package": "0603",
       "quantity": 1,
-      "notes": ""
+      "notes": "Samsung X7R +/-10% 50V (39nF). Per Samsung numbering - confirm stock.",
+      "mfrPart": "CL10B393KB8NNNC",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=CL10B393KB8NNNC"
     },
     {
       "category": "Capacitors",
       "value": "0.068uF",
       "package": "0603",
       "quantity": 1,
-      "notes": ""
+      "notes": "Samsung X7R +/-10% 50V (68nF). Per Samsung numbering - confirm stock.",
+      "mfrPart": "CL10B683KB8NNNC",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=CL10B683KB8NNNC"
     },
     {
       "category": "Capacitors",
       "value": "0.1uF",
       "package": "0402",
       "quantity": 1,
-      "notes": ""
+      "notes": "Samsung X7R +/-10% 16V. (50V alt: Murata GRM155R71H104KE14D.)",
+      "mfrPart": "CL05B104KO5NNNC",
+      "dkPart": "1276-1001-1-ND",
+      "dkLink": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL05B104KO5NNNC/3886659"
     },
     {
       "category": "Capacitors",
       "value": "0.1uF",
       "package": "0201",
       "quantity": 1,
-      "notes": ""
+      "notes": "Needs confirmation - 0.1uF/0201 typ X5R 6.3-16V. Suggested Samsung CL03A104*; confirm.",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=0.1uF 0201 X5R"
     },
     {
       "category": "Capacitors",
       "value": "0.1uF",
       "package": "0805",
       "quantity": 2,
-      "notes": ""
+      "notes": "Samsung X7R +/-10% 50V.",
+      "mfrPart": "CL21B104KBCNNNC",
+      "dkPart": "1276-1003-1-ND",
+      "dkLink": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL21B104KBCNNNC/3886661"
     },
     {
       "category": "Capacitors",
       "value": "0.1uF",
       "package": "0603",
       "quantity": 1,
-      "notes": ""
+      "notes": "Samsung X7R +/-10% 50V.",
+      "mfrPart": "CL10B104KB8NNNC",
+      "dkPart": "1276-1000-1-ND",
+      "dkLink": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL10B104KB8NNNC/3886658"
     },
     {
       "category": "Capacitors",
       "value": "0.1uF",
       "package": "1206",
       "quantity": 1,
-      "notes": ""
+      "notes": "Samsung X7R +/-10% 50V. Per Samsung numbering - confirm stock/suffix.",
+      "mfrPart": "CL31B104KBCNNNC",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=CL31B104KBCNNNC"
     },
     {
       "category": "Capacitors",
       "value": "0.22uF",
       "package": "0805",
       "quantity": 1,
-      "notes": ""
+      "notes": "Samsung X7R +/-10% 50V. Per Samsung numbering - confirm stock.",
+      "mfrPart": "CL21B224KBFNNNE",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=CL21B224KBFNNNE"
     },
     {
       "category": "Capacitors",
       "value": "0.22uF",
       "package": "1206",
       "quantity": 1,
-      "notes": ""
+      "notes": "Samsung X7R +/-10% 50V. Per Samsung numbering - confirm stock/suffix.",
+      "mfrPart": "CL31B224KBFNNNE",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=CL31B224KBFNNNE"
     },
     {
       "category": "Capacitors",
       "value": "0.33uF",
       "package": "0805",
       "quantity": 2,
-      "notes": ""
+      "notes": "Samsung X7R +/-10% 50V.",
+      "mfrPart": "CL21B334KBFNNNE",
+      "dkPart": "See link (sel CT/TR)",
+      "dkLink": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL21B334KBFNNNE/3889209"
     },
     {
       "category": "Capacitors",
       "value": "0.33uF",
       "package": "0603",
       "quantity": 1,
-      "notes": ""
+      "notes": "Needs confirmation - at 0603 likely 16-25V (50V uncommon). Suggested family Samsung CL10B334K*; pick voltage.",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=CL10B334K 0603 X7R"
     },
     {
       "category": "Capacitors",
       "value": "0.47uF",
       "package": "0805",
       "quantity": 1,
-      "notes": ""
+      "notes": "Samsung X7R +/-10% 50V. Per Samsung numbering - confirm stock.",
+      "mfrPart": "CL21B474KBFNNNE",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=CL21B474KBFNNNE"
     },
     {
       "category": "Capacitors",
       "value": "0.47uF",
       "package": "0603",
       "quantity": 3,
-      "notes": ""
+      "notes": "Needs confirmation - 0.47uF/0603 voltage drops (10-25V typ). Suggested Samsung CL10B474K*; pick voltage.",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=CL10B474K 0603 X7R"
     },
     {
       "category": "Capacitors",
       "value": "0.5pF",
       "package": "0402",
       "quantity": 1,
-      "notes": ""
+      "notes": "Needs confirmation - sub-1pF special tolerance (e.g. GRM1555C1HR50*); confirm exact value/tol.",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=0.5pF 0402 C0G"
     },
     {
       "category": "Capacitors",
       "value": "10000pF",
       "package": "0402",
       "quantity": 1,
-      "notes": ""
+      "notes": "Murata X7R +/-10% 50V (=0.01uF).",
+      "mfrPart": "GRM155R71H103KA88D",
+      "dkPart": "490-4516-1-ND",
+      "dkLink": "https://www.digikey.com/en/products/detail/murata-electronics/GRM155R71H103KA88D/1033275"
     },
     {
       "category": "Capacitors",
       "value": "1000pF",
       "package": "0402",
       "quantity": 2,
-      "notes": ""
+      "notes": "Murata X7R +/-10% 50V.",
+      "mfrPart": "GRM155R71H102KA01D",
+      "dkPart": "490-1303-1-ND",
+      "dkLink": "https://www.digikey.com/en/products/detail/murata-electronics/GRM155R71H102KA01D/587936"
     },
     {
       "category": "Capacitors",
       "value": "1000pF",
       "package": "0603",
       "quantity": 2,
-      "notes": ""
+      "notes": "Samsung X7R +/-10% 50V. P/N per Samsung numbering - confirm stock.",
+      "mfrPart": "CL10B102KB8NNNC",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=CL10B102KB8NNNC"
     },
     {
       "category": "Capacitors",
       "value": "100pF",
       "package": "0402",
       "quantity": 1,
-      "notes": ""
+      "notes": "Murata C0G/NP0 +/-5% 50V.",
+      "mfrPart": "GRM1555C1H101JA01D",
+      "dkPart": "490-5922-1-ND",
+      "dkLink": "https://www.digikey.com/en/products/detail/murata-electronics/GRM1555C1H101JA01D/3693829"
     },
     {
       "category": "Capacitors",
       "value": "100pF",
       "package": "0603",
       "quantity": 1,
-      "notes": ""
+      "notes": "C0G/NP0 +/-5% 50V. P/N per Murata numbering - confirm stock.",
+      "mfrPart": "GRM1885C1H101JA01D",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=GRM1885C1H101JA01D"
     },
     {
       "category": "Capacitors",
       "value": "100uF",
       "package": "radial",
       "quantity": 1,
-      "notes": ""
+      "notes": "Needs confirmation - through-hole electrolytic, voltage-critical (rating not specified).",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=100uF radial electrolytic"
     },
     {
       "category": "Capacitors",
       "value": "100uF",
-      "package": "brick thing",
+      "package": "brick",
       "quantity": 1,
-      "notes": ""
+      "notes": "Needs confirmation - \"brick\" type unclear (bulk electrolytic/poly?); voltage unknown.",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=100uF capacitor"
     },
     {
       "category": "Capacitors",
       "value": "100uF",
       "package": "2917",
       "quantity": 1,
-      "notes": ""
+      "notes": "Needs confirmation - 2917 = tantalum case D, voltage-critical.",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=100uF tantalum 2917 case D"
     },
     {
       "category": "Capacitors",
       "value": "10pF",
       "package": "0603",
       "quantity": 1,
-      "notes": ""
+      "notes": "Murata C0G/NP0 +/-5% 50V.",
+      "mfrPart": "GRM1885C1H100JA01D",
+      "dkPart": "490-1403-1-ND",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=GRM1885C1H100JA01D"
     },
     {
       "category": "Capacitors",
       "value": "10pF",
       "package": "0402",
       "quantity": 1,
-      "notes": ""
+      "notes": "Murata C0G/NP0 +/-5% 50V.",
+      "mfrPart": "GRM1555C1H100JZ01D",
+      "dkPart": "490-1278-1-ND",
+      "dkLink": "https://www.digikey.com/en/products/detail/murata-electronics/GRM1555C1H100JZ01D/587897"
     },
     {
       "category": "Capacitors",
       "value": "10uF",
       "package": "0603",
       "quantity": 2,
-      "notes": ""
+      "notes": "Needs confirmation - 10uF/0603 typ X5R 4-6.3V. Confirm dielectric/voltage (matters for AUV rails).",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=10uF 0603 X5R"
     },
     {
       "category": "Capacitors",
       "value": "10uF",
       "package": "1206",
       "quantity": 4,
-      "notes": ""
+      "notes": "Murata X7R +/-10% 25V.",
+      "mfrPart": "GRM31CR71E106KA12L",
+      "dkPart": "490-6518-1-ND",
+      "dkLink": "https://www.digikey.com/en/products/detail/murata-electronics/GRM31CR71E106KA12L/2345330"
     },
     {
       "category": "Capacitors",
       "value": "10uF",
       "package": "radial",
       "quantity": 1,
-      "notes": ""
+      "notes": "Needs confirmation - through-hole electrolytic, voltage not specified.",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=10uF radial electrolytic"
     },
     {
       "category": "Capacitors",
       "value": "1200pF",
       "package": "0402",
       "quantity": 1,
-      "notes": ""
+      "notes": "X7R +/-10% 50V. P/N per Murata numbering - confirm stock.",
+      "mfrPart": "GRM155R71H122KA01D",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=GRM155R71H122KA01D"
     },
     {
       "category": "Capacitors",
       "value": "120pF",
       "package": "0402",
       "quantity": 1,
-      "notes": ""
+      "notes": "C0G/NP0 +/-5% 50V. P/N per Murata numbering - confirm stock.",
+      "mfrPart": "GRM1555C1H121JA01D",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=GRM1555C1H121JA01D"
     },
     {
       "category": "Capacitors",
       "value": "15pF",
       "package": "0402",
       "quantity": 1,
-      "notes": ""
+      "notes": "C0G/NP0 +/-5% 50V. P/N per Murata numbering - confirm stock.",
+      "mfrPart": "GRM1555C1H150JA01D",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=GRM1555C1H150JA01D"
     },
     {
       "category": "Capacitors",
       "value": "180pF",
       "package": "0402",
       "quantity": 1,
-      "notes": ""
+      "notes": "C0G/NP0 +/-5% 50V. P/N per Murata numbering - confirm stock.",
+      "mfrPart": "GRM1555C1H181JA01D",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=GRM1555C1H181JA01D"
     },
     {
       "category": "Capacitors",
       "value": "1pF",
       "package": "0402",
       "quantity": 1,
-      "notes": ""
+      "notes": "Needs confirmation - 1pF uses +/-0.1/0.25pF tolerance codes (e.g. GRM1555C1H1R0*); confirm tol.",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=1pF 0402 C0G"
     },
     {
       "category": "Capacitors",
       "value": "1uF",
       "package": "0805",
       "quantity": 2,
-      "notes": ""
+      "notes": "Samsung X7R +/-10% 25V.",
+      "mfrPart": "CL21B105KAFNNNE",
+      "dkPart": "See link (sel CT/TR)",
+      "dkLink": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL21B105KAFNNNE/3889152"
     },
     {
       "category": "Capacitors",
       "value": "1uF",
       "package": "0603",
       "quantity": 1,
-      "notes": ""
+      "notes": "Needs confirmation - 1uF/0603 typ 16-25V X7R. Suggested Samsung CL10B105K*; pick voltage.",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=CL10B105K 0603 X7R"
     },
     {
       "category": "Capacitors",
       "value": "1uF",
       "package": "1206",
       "quantity": 1,
-      "notes": ""
+      "notes": "Samsung X7R +/-10% 50V. Per Samsung numbering - confirm stock/suffix.",
+      "mfrPart": "CL31B105KBHNNNE",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=CL31B105KBHNNNE"
     },
     {
       "category": "Capacitors",
       "value": "2.2uF",
       "package": "0805",
       "quantity": 1,
-      "notes": ""
+      "notes": "Samsung X7R +/-10% 25V.",
+      "mfrPart": "CL21B225KAFNNNF",
+      "dkPart": "See link (sel CT/TR)",
+      "dkLink": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL21B225KAFNNNF/3894504"
     },
     {
       "category": "Capacitors",
       "value": "2.2uF",
       "package": "0603",
       "quantity": 1,
-      "notes": ""
+      "notes": "Needs confirmation - 2.2uF/0603 typ X5R 6.3-16V. Confirm dielectric/voltage.",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=2.2uF 0603 X5R"
     },
     {
       "category": "Capacitors",
       "value": "2200pF",
       "package": "0603",
       "quantity": 1,
-      "notes": ""
+      "notes": "Samsung X7R +/-10% 50V. P/N per Samsung numbering - confirm stock.",
+      "mfrPart": "CL10B222KB8NNNC",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=CL10B222KB8NNNC"
     },
     {
       "category": "Capacitors",
       "value": "220pF",
       "package": "0603",
       "quantity": 1,
-      "notes": ""
+      "notes": "C0G/NP0 +/-5% 50V. P/N per Murata numbering - confirm stock.",
+      "mfrPart": "GRM1885C1H221JA01D",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=GRM1885C1H221JA01D"
     },
     {
       "category": "Capacitors",
       "value": "22pF",
       "package": "0402",
       "quantity": 1,
-      "notes": ""
+      "notes": "C0G/NP0 +/-5% 50V. P/N per Murata numbering - confirm stock.",
+      "mfrPart": "GRM1555C1H220JA01D",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=GRM1555C1H220JA01D"
     },
     {
       "category": "Capacitors",
       "value": "22uF",
       "package": "1206",
       "quantity": 2,
-      "notes": ""
+      "notes": "Needs confirmation - 22uF/1206 typ X5R 6.3-16V. Confirm dielectric/voltage.",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=22uF 1206 X5R"
     },
     {
       "category": "Capacitors",
       "value": "22uF",
       "package": "2917",
       "quantity": 1,
-      "notes": ""
+      "notes": "Needs confirmation - 2917 = tantalum case D, voltage-critical.",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=22uF tantalum 2917 case D"
     },
     {
       "category": "Capacitors",
       "value": "2400pF",
       "package": "0805",
       "quantity": 1,
-      "notes": ""
+      "notes": "Needs confirmation - 2400pF is non-standard (2200/2700 are E-series); confirm intended value.",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=2400pF 0805 X7R"
     },
     {
       "category": "Capacitors",
       "value": "2700pF",
       "package": "0402",
       "quantity": 1,
-      "notes": ""
+      "notes": "Murata X7R +/-10% 50V.",
+      "mfrPart": "GRM155R71H272KA01D",
+      "dkPart": "490-1306-1-ND",
+      "dkLink": "https://www.digikey.com/en/products/detail/murata-electronics/GRM155R71H272KA01D/587948"
     },
     {
       "category": "Capacitors",
       "value": "330pF",
       "package": "0402",
       "quantity": 1,
-      "notes": ""
+      "notes": "C0G/NP0 +/-5% 50V. P/N per Murata numbering - confirm stock.",
+      "mfrPart": "GRM1555C1H331JA01D",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=GRM1555C1H331JA01D"
     },
     {
       "category": "Capacitors",
       "value": "33uF",
       "package": "2312",
       "quantity": 1,
-      "notes": ""
+      "notes": "Needs confirmation - tantalum-class case, voltage-critical.",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=33uF tantalum 2312"
     },
     {
       "category": "Capacitors",
       "value": "3900pF",
       "package": "0402",
       "quantity": 1,
-      "notes": ""
+      "notes": "X7R +/-10% 50V. P/N per Murata numbering - confirm stock.",
+      "mfrPart": "GRM155R71H392KA01D",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=GRM155R71H392KA01D"
     },
     {
       "category": "Capacitors",
       "value": "390pF",
       "package": "0603",
       "quantity": 1,
-      "notes": ""
+      "notes": "C0G/NP0 +/-5% 50V. P/N per Murata numbering - confirm stock.",
+      "mfrPart": "GRM1885C1H391JA01D",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=GRM1885C1H391JA01D"
     },
     {
       "category": "Capacitors",
       "value": "4.7uF",
       "package": "1206",
       "quantity": 2,
-      "notes": ""
+      "notes": "Samsung X7R +/-10% 25V.",
+      "mfrPart": "CL31B475KAHNNNE",
+      "dkPart": "1276-1055-1-ND",
+      "dkLink": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL31B475KAHNNNE/3889141"
     },
     {
       "category": "Capacitors",
       "value": "4.7uF",
       "package": "0603",
       "quantity": 1,
-      "notes": ""
+      "notes": "Needs confirmation - 4.7uF/0603 typ X5R 6.3-10V. Confirm dielectric/voltage.",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=4.7uF 0603 X5R"
     },
     {
       "category": "Capacitors",
       "value": "4.7uF",
       "package": "0805",
       "quantity": 3,
-      "notes": ""
+      "notes": "Samsung X7R +/-10% 25V.",
+      "mfrPart": "CL21B475KAFNNNE",
+      "dkPart": "See link (sel CT/TR)",
+      "dkLink": "https://www.digikey.com/en/products/detail/samsung-electro-mechanics/CL21B475KAFNNNE/3888627"
     },
     {
       "category": "Capacitors",
       "value": "43pF",
       "package": "0402",
       "quantity": 1,
-      "notes": ""
+      "notes": "C0G/NP0 +/-5% 50V (43pF=E24). Per Murata numbering - confirm stock.",
+      "mfrPart": "GRM1555C1H430JA01D",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=GRM1555C1H430JA01D"
     },
     {
       "category": "Capacitors",
       "value": "46pF",
       "package": "0402",
       "quantity": 1,
-      "notes": ""
+      "notes": "Needs confirmation - 46pF is non-standard; likely 47pF (Murata GRM1555C1H470JA01D). Confirm intended value.",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=47pF 0402 C0G"
     },
     {
       "category": "Capacitors",
       "value": "4700pF",
       "package": "0402",
       "quantity": 1,
-      "notes": ""
+      "notes": "Murata X7R +/-10% 50V.",
+      "mfrPart": "GRM155R71H472KA01D",
+      "dkPart": "See link (sel CT/TR)",
+      "dkLink": "https://www.digikey.com/en/products/detail/murata-electronics/GRM155R71H472KA01D/587235"
     },
     {
       "category": "Capacitors",
       "value": "470uF",
       "package": "radial",
       "quantity": 2,
-      "notes": ""
+      "notes": "Needs confirmation - through-hole electrolytic, voltage-critical.",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=470uF radial electrolytic"
     },
     {
       "category": "Capacitors",
       "value": "47uF",
       "package": "",
       "quantity": 1,
-      "notes": ""
+      "notes": "Needs confirmation - no package given; type (electrolytic/tantalum/ceramic) and voltage unknown.",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=47uF capacitor"
     },
     {
       "category": "Capacitors",
       "value": "47uF",
       "package": "3024",
       "quantity": 1,
-      "notes": ""
+      "notes": "Needs confirmation - unusual case (tantalum?), voltage-critical.",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=47uF tantalum 3024"
     },
     {
       "category": "Capacitors",
       "value": "56pF",
       "package": "0603",
       "quantity": 1,
-      "notes": ""
+      "notes": "C0G/NP0 +/-5% 50V. P/N per Murata numbering - confirm stock.",
+      "mfrPart": "GRM1885C1H560JA01D",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=GRM1885C1H560JA01D"
     },
     {
       "category": "Capacitors",
       "value": "680pF",
       "package": "0603",
       "quantity": 2,
-      "notes": ""
+      "notes": "Murata C0G/NP0 +/-5% 50V.",
+      "mfrPart": "GRM1885C1H681JA01D",
+      "dkPart": "See link (sel CT/TR)",
+      "dkLink": "https://www.digikey.com/en/products/detail/murata-electronics/GRM1885C1H681JA01D/586952"
     },
     {
       "category": "Capacitors",
       "value": "68pF",
       "package": "0402",
       "quantity": 1,
-      "notes": ""
+      "notes": "C0G/NP0 +/-5% 50V. P/N per Murata numbering - confirm stock.",
+      "mfrPart": "GRM1555C1H680JA01D",
+      "dkPart": "See link",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=GRM1555C1H680JA01D"
     },
     {
       "category": "Capacitors",
       "value": "82uF",
       "package": "",
       "quantity": 1,
-      "notes": ""
+      "notes": "Needs confirmation - no package; 82uF non-standard; voltage unknown.",
+      "mfrPart": "",
+      "dkPart": "",
+      "dkLink": "https://www.digikey.com/en/products/result?keywords=82uF capacitor"
     },
     {
       "category": "Resistors",
       "value": "220",
       "package": "0402",
       "quantity": 1,
-      "notes": ""
+      "notes": "Yageo 220R 1% 1/16W thick film.",
+      "mfrPart": "RC0402FR-07220RL",
+      "dkPart": "See link (sel CT/TR)",
+      "dkLink": "https://www.digikey.com/en/products/detail/yageo/RC0402FR-07220RL/726565"
     },
     {
       "category": "Resistors",
       "value": "4.7k",
       "package": "0603",
       "quantity": 1,
-      "notes": ""
+      "notes": "Yageo 4.7k 1% 1/10W thick film.",
+      "mfrPart": "RC0603FR-074K7L",
+      "dkPart": "See link (sel CT/TR)",
+      "dkLink": "https://www.digikey.com/en/products/detail/yageo/RC0603FR-074K7L/727212"
     }
   ]
 }

@@ -14,4 +14,12 @@ contextBridge.exposeInMainWorld('inventory', {
   importJson: () => ipcRenderer.invoke('inventory:import'),
   dataDir: () => ipcRenderer.invoke('inventory:dataDir'),
   revealData: () => ipcRenderer.invoke('inventory:revealData'),
+  openLink: (url) => ipcRenderer.invoke('inventory:openLink', url),
+});
+
+// Google Sheets sync.
+contextBridge.exposeInMainWorld('sheets', {
+  getSettings: () => ipcRenderer.invoke('settings:get'),
+  saveSettings: (cfg) => ipcRenderer.invoke('settings:save', cfg),
+  sync: () => ipcRenderer.invoke('sheets:sync'),
 });
