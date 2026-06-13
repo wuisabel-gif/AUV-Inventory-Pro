@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' blob:; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:;" />
+    <title>AUV Inventory Pro</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">
+            <svg viewBox="0 0 48 48" width="34" height="34" aria-hidden="true">
+              <path d="M6 28c6-4 10-4 16 0s10 4 16 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+              <path d="M6 36c6-4 10-4 16 0s10 4 16 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+              <ellipse cx="24" cy="16" rx="13" ry="7.5" fill="none" stroke="currentColor" stroke-width="3"/>
+              <circle cx="24" cy="16" r="2.4" fill="currentColor"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <h1>AUV Inventory</h1>
+            <span>Electrical &amp; Electronics</span>
+          </div>
+        </div>
+
+        <nav class="cats" id="cats"></nav>
+
+        <div class="sidebar-foot">
+          <button class="sync-btn" id="btn-sync">
+            <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true">
+              <path d="M7 17a5 5 0 0 1-1-9.9A6 6 0 0 1 18 8h.5a3.5 3.5 0 0 1 0 7H7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+              <path d="M12 11v5m0 0-2-2m2 2 2-2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Sync to Sheets</span>
+          </button>
+          <div class="foot-row">
+            <button class="ghost-btn" id="btn-export-json">Export JSON</button>
+            <button class="ghost-btn" id="btn-export-csv">Export CSV</button>
+          </div>
+          <div class="foot-row">
+            <button class="ghost-btn" id="btn-import">Import…</button>
+            <button class="ghost-btn" id="btn-reveal">Data file</button>
+          </div>
+          <div class="updated" id="updated"></div>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <main class="main">
+        <header class="topbar">
+          <div class="search-wrap">
+            <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+              <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <input id="search" type="text" placeholder="Search value, package, location, notes…  (e.g. 0.1uF 0402)" autocomplete="off" spellcheck="false" />
+            <kbd class="search-kbd">⌘K</kbd>
+          </div>
+          <div class="topbar-actions">
+            <label class="lowstock-toggle">
+              <input type="checkbox" id="lowstock-only" /> <span>Low stock only</span>
+            </label>
+            <select id="sourcing-filter" title="Filter by sourcing status">
+              <option value="all">Sourcing: All</option>
+              <option value="verified">✓ Verified</option>
+              <option value="std">Confirm stock</option>
+              <option value="check">Needs confirm</option>
+              <option value="none">Not sourced</option>
+            </select>
+            <select id="sort">
+              <option value="value">Sort: Value</option>
+              <option value="qty-desc">Sort: Qty (high→low)</option>
+              <option value="qty-asc">Sort: Qty (low→high)</option>
+              <option value="package">Sort: Package</option>
+              <option value="updated">Sort: Recently updated</option>
+            </select>
+            <button class="primary-btn" id="btn-add">+ Add part</button>
+          </div>
+        </header>
+
+        <section class="stats" id="stats"></section>
+
+        <section class="table-wrap">
+          <table class="grid">
+            <thead>
+              <tr>
+                <th class="col-cat">Category</th>
+                <th class="col-val">Value</th>
+                <th class="col-pkg">Package</th>
+                <th class="col-mfr">Mfr Part #</th>
+                <th class="col-notes">Notes</th>
+                <th class="col-qty">Qty</th>
+                <th class="col-act"></th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
+          <div class="empty" id="empty" hidden>
+            <div class="empty-glyph">∅</div>
+            <p id="empty-text">No parts match your search.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Add / Edit modal -->
+    <div class="modal-backdrop" id="modal" hidden>
+      <div class="modal" role="dialog" aria-modal="true">
+        <h2 id="modal-title">Add part</h2>
+        <form id="part-form">
+          <input type="hidden" id="f-id" />
+          <div class="field">
+            <label for="f-category">Category</label>
+            <select id="f-category" required></select>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-value">Value</label>
+              <input id="f-value" type="text" placeholder="e.g. 4.7k, 0.1uF, 10uH" required />
+            </div>
+            <div class="field">
+              <label for="f-package">Package / footprint</label>
+              <input id="f-package" type="text" placeholder="e.g. 0402, 1206, radial" />
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-quantity">Quantity</label>
+              <input id="f-quantity" type="number" min="0" step="1" value="1" required />
+            </div>
+            <div class="field">
+              <label for="f-threshold">Low-stock alert at/below</label>
+              <input id="f-threshold" type="number" min="0" step="1" value="0" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-location">Location / bin</label>
+            <input id="f-location" type="text" placeholder="e.g. Drawer B3, Reel cabinet" />
+          </div>
+          <div class="field">
+            <label for="f-notes">Notes</label>
+            <input id="f-notes" type="text" placeholder="dielectric, voltage rating, status, etc." />
+          </div>
+          <div class="field-section">Manufacturing / sourcing</div>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-mfrPart">Manufacturer part #</label>
+              <input id="f-mfrPart" type="text" placeholder="e.g. GRM155R71H104KE14D" spellcheck="false" />
+            </div>
+            <div class="field">
+              <label for="f-dkPart">Digi-Key part #</label>
+              <input id="f-dkPart" type="text" placeholder="e.g. 490-1303-1-ND" spellcheck="false" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-dkLink">Digi-Key link</label>
+            <input id="f-dkLink" type="text" placeholder="https://www.digikey.com/…" spellcheck="false" />
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="danger-btn" id="f-delete" hidden>Delete</button>
+            <span class="spacer"></span>
+            <button type="button" class="ghost-btn" id="f-cancel">Cancel</button>
+            <button type="submit" class="primary-btn" id="f-save">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Google Sheets sync modal -->
+    <div class="modal-backdrop" id="sync-modal" hidden>
+      <div class="modal" role="dialog" aria-modal="true">
+        <h2>Sync to Google Sheets</h2>
+        <p class="modal-hint">
+          Paste the <strong>web app URL</strong> and <strong>token</strong> from your Apps Script
+          deployment. Syncing overwrites the Sheet's <code>Inventory</code> tab with the current
+          parts list. One-time setup steps are in <code>google-apps-script/README.md</code>.
+        </p>
+        <div class="field">
+          <label for="s-url">Web app URL</label>
+          <input id="s-url" type="text" placeholder="https://script.google.com/macros/s/…/exec" spellcheck="false" />
+        </div>
+        <div class="field">
+          <label for="s-token">Shared token</label>
+          <input id="s-token" type="text" placeholder="the secret you set in the script" spellcheck="false" />
+        </div>
+        <div class="sync-status" id="sync-status"></div>
+        <div class="modal-actions">
+          <span class="spacer"></span>
+          <button type="button" class="ghost-btn" id="s-cancel">Close</button>
+          <button type="button" class="ghost-btn" id="s-save">Save</button>
+          <button type="button" class="primary-btn" id="s-sync">Save &amp; Sync now</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" hidden></div>
+
+    <script src="mock.js"></script>
+    <script src="renderer.js"></script>
+  </body>
+</html>
