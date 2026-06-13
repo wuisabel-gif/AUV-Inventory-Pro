@@ -1,0 +1,40 @@
+{
+  "name": "auv-inventory-pro",
+  "productName": "AUV Inventory Pro",
+  "version": "1.0.0",
+  "description": "Electronics inventory manager for the Autonomous Underwater Vehicle team",
+  "main": "main.js",
+  "author": "AUV Team",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder",
+    "dist:mac": "electron-builder --mac"
+  },
+  "build": {
+    "appId": "org.auv.inventory",
+    "productName": "AUV Inventory Pro",
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "data/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": [
+        "dmg"
+      ]
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.0.0"
+  }
+}

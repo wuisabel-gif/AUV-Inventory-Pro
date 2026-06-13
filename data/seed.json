@@ -1,0 +1,462 @@
+{
+  "schemaVersion": 1,
+  "lastUpdated": "6/12/2026",
+  "categories": [
+    "Resistors",
+    "Capacitors",
+    "Diodes/LEDs",
+    "Inductors",
+    "ICs",
+    "Connectors"
+  ],
+  "items": [
+    {
+      "category": "Capacitors",
+      "value": "0.018uF",
+      "package": "0402",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "0.039uF",
+      "package": "0603",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "0.068uF",
+      "package": "0603",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "0.1uF",
+      "package": "0402",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "0.1uF",
+      "package": "0201",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "0.1uF",
+      "package": "0805",
+      "quantity": 2,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "0.1uF",
+      "package": "0603",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "0.1uF",
+      "package": "1206",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "0.22uF",
+      "package": "0805",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "0.22uF",
+      "package": "1206",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "0.33uF",
+      "package": "0805",
+      "quantity": 2,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "0.33uF",
+      "package": "0603",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "0.47uF",
+      "package": "0805",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "0.47uF",
+      "package": "0603",
+      "quantity": 3,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "0.5pF",
+      "package": "0402",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "10000pF",
+      "package": "0402",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "1000pF",
+      "package": "0402",
+      "quantity": 2,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "1000pF",
+      "package": "0603",
+      "quantity": 2,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "100pF",
+      "package": "0402",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "100pF",
+      "package": "0603",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "100uF",
+      "package": "radial",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "100uF",
+      "package": "brick thing",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "100uF",
+      "package": "2917",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "10pF",
+      "package": "0603",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "10pF",
+      "package": "0402",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "10uF",
+      "package": "0603",
+      "quantity": 2,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "10uF",
+      "package": "1206",
+      "quantity": 4,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "10uF",
+      "package": "radial",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "1200pF",
+      "package": "0402",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "120pF",
+      "package": "0402",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "15pF",
+      "package": "0402",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "180pF",
+      "package": "0402",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "1pF",
+      "package": "0402",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "1uF",
+      "package": "0805",
+      "quantity": 2,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "1uF",
+      "package": "0603",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "1uF",
+      "package": "1206",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "2.2uF",
+      "package": "0805",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "2.2uF",
+      "package": "0603",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "2200pF",
+      "package": "0603",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "220pF",
+      "package": "0603",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "22pF",
+      "package": "0402",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "22uF",
+      "package": "1206",
+      "quantity": 2,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "22uF",
+      "package": "2917",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "2400pF",
+      "package": "0805",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "2700pF",
+      "package": "0402",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "330pF",
+      "package": "0402",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "33uF",
+      "package": "2312",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "3900pF",
+      "package": "0402",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "390pF",
+      "package": "0603",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "4.7uF",
+      "package": "1206",
+      "quantity": 2,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "4.7uF",
+      "package": "0603",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "4.7uF",
+      "package": "0805",
+      "quantity": 3,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "43pF",
+      "package": "0402",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "46pF",
+      "package": "0402",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "4700pF",
+      "package": "0402",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "470uF",
+      "package": "radial",
+      "quantity": 2,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "47uF",
+      "package": "",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "47uF",
+      "package": "3024",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "56pF",
+      "package": "0603",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "680pF",
+      "package": "0603",
+      "quantity": 2,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "68pF",
+      "package": "0402",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Capacitors",
+      "value": "82uF",
+      "package": "",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Resistors",
+      "value": "220",
+      "package": "0402",
+      "quantity": 1,
+      "notes": ""
+    },
+    {
+      "category": "Resistors",
+      "value": "4.7k",
+      "package": "0603",
+      "quantity": 1,
+      "notes": ""
+    }
+  ]
+}
