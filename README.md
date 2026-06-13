@@ -5,7 +5,7 @@ inventory. Built to replace the spreadsheet with fast search, in-place quantity
 editing, low-stock alerts, and a clean underwater-themed UI using the team's
 **ALK Rounded** typeface.
 
-![categories: Resistors, Capacitors, Diodes/LEDs, Inductors, ICs, Connectors](src/fonts/)
+![AUV Inventory Pro demo](demo.gif)
 
 ## Run it
 
