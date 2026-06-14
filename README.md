@@ -1,78 +1,71 @@
 # AUV Inventory Pro
 
-A desktop app for the Autonomous Underwater Vehicle team's electrical & electronics
-inventory. Built to replace the spreadsheet with fast search, in-place quantity
-editing, low-stock alerts, and a clean underwater-themed UI using the team's
-**ALK Rounded** typeface.
+This is the desktop app I built so we can stop wrangling the parts spreadsheet.
+It tracks our electrical/electronics inventory (resistors, caps, diodes, ICs,
+connectors) with real search, quantity tracking, low-stock alerts, and Digi-Key
+sourcing info baked in.
 
 ![AUV Inventory Pro demo](demo.gif)
 
-## Run it
+Want to just poke at it without installing anything? There's a live web version
+here: **https://wuisabel-gif.github.io/AUV-Inventory-Pro/** (it runs in your
+browser, and changes you make there only live in your browser, not the real data).
+
+## Running it
+
+You'll need [Node.js](https://nodejs.org) (I built it on Node 26). Then:
 
 ```bash
-npm install      # one time
-npm start        # launches the app
+npm install      # just the first time
+npm start        # opens the app
 ```
 
-Requires [Node.js](https://nodejs.org) (tested on Node 26). `npm start` runs it
-through Electron — no build step needed for day-to-day use.
+No build step, no hot reload. If you change the UI, just stop it and run
+`npm start` again.
 
-## Package a standalone app (optional)
-
-To produce a double-clickable app you can hand to teammates who don't have Node:
+Want a double-clickable app for teammates who don't want to touch a terminal?
 
 ```bash
-npm run dist:mac     # → dist/AUV Inventory Pro.dmg  (macOS)
-npm run dist         # current platform
+npm run dist:mac     # → dist/AUV Inventory Pro.dmg  (Mac)
+npm run dist         # whatever OS you're on
 ```
 
-## Features
+## What it does
 
-- **Search** — type any combination of value / package / location / notes; terms
-  match in any order, so `0402 0.1uf` finds `0.1uF 0402`. Matches are highlighted.
-  Press **⌘K** to jump to the search box.
-- **Category sidebar** — Resistors, Capacitors, Diodes/LEDs, Inductors, ICs,
-  Connectors, with live counts.
-- **Quantity steppers** — `+` / `−` on every row write through to disk instantly.
-- **Add / edit / delete** parts (**⌘N** for a new part). Each part has a category,
-  value, package/footprint, quantity, location/bin, notes, and a per-part
-  low-stock threshold.
-- **Low-stock alerts** — a part is flagged **OUT** at 0, or **LOW** when it reaches
-  its threshold. The threshold defaults to **0** (alert only when out of stock);
-  raise it per-part for an early warning. The "Low stock only" toggle filters to
-  just those parts.
-- **Manufacturing / sourcing** — each part can carry a manufacturer part #,
-  Digi-Key part #, and a Digi-Key link (the ↗ button opens it in your browser).
-  A status badge is inferred from the data: **Verified** (links to a live
-  Digi-Key product page), **Confirm stock** (manufacturer part # filled via the
-  documented numbering scheme), or **Needs confirm** (value/voltage ambiguous).
+- **Search that actually works.** Type any mix of value / package / location /
+  notes / part number, in any order, so `0402 0.1uf` finds `0.1uF 0402`. Hit
+  **⌘K** to jump straight to the search box.
+- **Categories down the left:** Resistors, Capacitors, Diodes/LEDs, Inductors,
+  ICs, Connectors, each with a live count. Click one to filter.
+- **Bump quantities right in the row.** The `+` / `−` buttons save instantly.
+- **Add / edit / delete parts** (**⌘N** for a new one). Every part has a category,
+  value, package, quantity, location/bin, notes, and its own low-stock threshold.
+- **Low-stock alerts.** A part shows **OUT** at 0, or **LOW** once it hits its
+  threshold. Threshold defaults to 0 (so it only yells when you're actually out);
+  bump it per-part if you want an earlier heads-up. There's a "Low stock only"
+  toggle too.
+- **Sourcing info.** Each part can hold a manufacturer part #, Digi-Key part #,
+  and a Digi-Key link (the ↗ opens it in your browser). It also tags each one:
+  **Verified** (real Digi-Key page), **Confirm stock** (part # is right, just
+  double-check availability), or **Needs confirm** (value/voltage is ambiguous, so
+  somebody needs to decide). Filter by these with the "Sourcing" dropdown.
 - **Sort** by value, quantity, package, or recently updated.
-- **Export / Import** — JSON (full backup/restore) and CSV (for spreadsheets).
-- **Sync to Google Sheets** — push the current inventory to a shared team Sheet
-  with one click (see below).
+- **Export / Import:** JSON for full backups, CSV for spreadsheets.
+- **Push to a Google Sheet** so the rest of the team can see it (setup below).
 
-## How data is stored
+## Where the data lives
 
-Data lives in a single human-readable JSON file in the app's per-user data folder:
+Everything's in one plain JSON file on your machine:
 
 ```
-macOS:  ~/Library/Application Support/AUV Inventory Pro/inventory.json
+Mac:  ~/Library/Application Support/AUV Inventory Pro/inventory.json
 ```
 
-Click **"Show data file"** in the app to reveal it in Finder.
-
-Why JSON rather than a database:
-
-- **Robust & simple** — no native modules, no migrations, nothing to break on a
-  Node/Electron upgrade. Right-sized for an inventory of hundreds of parts.
-- **Inspectable & portable** — readable by anyone, diff-able in git, editable by
-  hand in an emergency.
-- **Safe writes** — every save is atomic (write-temp-then-rename, so a crash can't
-  corrupt the file) and a timestamped copy is kept in a `backups/` folder
-  (last 30 days). If the main file is ever unreadable, the app auto-recovers from
-  the newest backup.
-
-Each part record:
+Hit **"Show data file"** in the app to open that folder. I went with a JSON file
+instead of a database on purpose. It's simple, you can read/edit it by hand if
+something's weird, and there's nothing to break when Node/Electron updates. Saves
+are atomic and it keeps daily backups in a `backups/` folder, so a bad edit won't
+nuke everything. A part looks like this:
 
 ```json
 {
@@ -91,51 +84,99 @@ Each part record:
 }
 ```
 
-### Sharing one inventory across the team
+Heads up: your live inventory lives in that folder, **not** in this repo.
+`data/seed.json` is just the starter data the app copies in on first launch. It
+came from our original `AUV Electrical Inventory.xlsx` (each row split into a
+value + package, duplicates rolled up into quantities). Editing `seed.json` later
+won't touch an install that's already running.
 
-JSON makes this easy. Either:
-- Keep the repo's `data/seed.json` as the shared source of truth and **Import** it,
-  or **Export JSON** and commit it back; or
-- Point the team at a shared/cloud folder and replace `inventory.json` there.
+### Sharing one list across the team
 
-If you later outgrow a single shared file (concurrent editors, audit history),
-the natural next step is a small hosted database — but for the current scale,
-JSON + git is the lower-maintenance choice.
+Easiest options: keep `data/seed.json` as the shared source of truth and
+**Import** it (or **Export JSON** and commit it back), or drop `inventory.json`
+in a shared/cloud folder. If we ever outgrow one file (lots of people editing at
+once), we'd move to a small hosted DB, but for now this is way less hassle.
 
-## Sync to Google Sheets
+## Hooking it up to Google Sheets
 
-The **Sync to Sheets** button pushes the current inventory into a shared Google
-Sheet so the whole team can view it. It's **one-way** (app → Sheet): syncing
-overwrites the Sheet's `Inventory` tab with the app's current parts list.
+The **Sync to Sheets** button shoves the current inventory into a shared Google
+Sheet so everyone can see it. It's one-way (app → Sheet): syncing overwrites the
+Sheet's tab with whatever's in the app.
 
-It uses a tiny **Google Apps Script web app** — no Google Cloud project, OAuth
-libraries, or key files; just a URL and a shared token. The one-time (~5 min)
-setup is in [`google-apps-script/README.md`](google-apps-script/README.md);
-the script itself is [`google-apps-script/Code.gs`](google-apps-script/Code.gs).
-Once deployed, paste the web app URL + token into the app's **Sync to Sheets**
-dialog and click **Save & Sync now**.
+Under the hood it's a tiny **Google Apps Script** living in the Sheet. No Google
+Cloud project or API keys, just a deployment **URL** and a **token** you make up.
+The script is [`google-apps-script/Code.gs`](google-apps-script/Code.gs). Heads
+up: it's a one-time setup and it needs your Google login, so you have to do this
+part yourself.
 
-The URL and token are stored locally in `settings.json` (next to
-`inventory.json`), separate from the inventory data so the token never ends up
-in an exported file.
+### Setting it up (~5 min, once)
 
-## Seeding from the original spreadsheet
+1. Make a new Sheet at [sheets.google.com](https://sheets.google.com).
+2. In the Sheet: **Extensions → Apps Script**. Delete whatever's there and paste
+   all of [`google-apps-script/Code.gs`](google-apps-script/Code.gs).
+3. Change the `SHARED_TOKEN` line to any long random string. You'll paste the
+   *same* one into the app later:
+   ```js
+   var SHARED_TOKEN = 'your-long-random-secret';
+   ```
+4. **Save** it (💾). Don't skip this: unsaved code doesn't deploy, and that's the
+   #1 reason it "doesn't work."
+5. **Deploy → New deployment** → gear ⚙️ → **Web app**:
+   - **Execute as:** Me
+   - **Who has access:** **Anyone** (the plain one, *not* "Anyone with a Google
+     account")
+   - **Deploy**, then authorize it (click through the "unverified app" warning;
+     it's your own script, that's normal).
 
-`data/seed.json` was generated from `AUV Electrical Inventory.xlsx`. Each row was
-parsed into a `value` + `package` (e.g. `220 0402` → value `220`, package `0402`),
-and duplicate entries were collapsed into a `quantity`. On first launch the app
-copies this seed into your data folder; after that, your edits live only in
-`inventory.json` and the seed is left untouched.
+### Grabbing the URL (this is the part that trips people up)
 
-## Project layout
+After deploying, copy the **Web app URL**. It ends in **`/exec`**. Lost it? Get
+it back from **Deploy → Manage deployments → ✏️**.
+
+- ✅ The one ending in **`/exec`** is the real one.
+- ❌ The `/dev` one is just for testing and will fail from the app.
+
+Then in the app: open **Sync to Sheets**, paste the `/exec` URL and your token,
+hit **Save & Sync now**. You should see "Synced N parts ✓". Full walkthrough is in
+[`google-apps-script/README.md`](google-apps-script/README.md).
+
+If you change `Code.gs` later, you have to **redeploy a new version** (Manage
+deployments → ✏️ → Version: New version → Deploy). The URL stays the same.
+
+### If it fights you
+
+- **"Script function not found: doGet" or the app gets HTML back:** the deployed
+  version doesn't have the code. Paste it, **Save**, redeploy a new version.
+- **It redirects to a USC (or other school) login page:** ⚠️ this one got us. A
+  **usc.edu Google account won't work**, because USC forces everything through
+  their login, so the app can never reach it. You can tell because the URL has
+  `usc.edu` in it (`script.google.com/a/macros/usc.edu/s/…`). **Fix:** do the
+  whole setup signed in as a personal Gmail (e.g. **uscauv@gmail.com**). There the
+  URL is `script.google.com/macros/s/…/exec` with no `usc.edu`, and "Anyone" is
+  actually allowed.
+- **Quick test:** paste the `/exec` URL into a browser. If it's working you'll see
+  `{"ok":true,...}`. A login page or error means it's not public yet.
+
+Don't have a Gmail you can deploy from, or don't want to bother? You can skip all
+this and just **Export CSV** from the app and `File → Import` it into a Sheet.
+Same data, no script.
+
+## How it's built (for whoever maintains this next)
 
 ```
-main.js          Electron main process — window + data layer (load/save/backup/IPC)
-preload.js       Secure bridge exposing the data API to the UI
-src/index.html   Layout
-src/style.css    Theme + @font-face for the ALK Rounded typeface
-src/renderer.js  UI logic — search, filter, sort, modal, quantity edits
-src/fonts/       Bundled team typeface
-data/seed.json   Initial inventory parsed from the xlsx
-google-apps-script/   Code.gs + setup guide for the Google Sheets sync endpoint
+main.js          Electron main process: the window + all the data stuff (save/backup/sync)
+preload.js       the safe bridge between the UI and the data layer
+src/index.html   layout
+src/style.css    theme + our ALK Rounded font
+src/renderer.js  the UI logic: search, filter, sort, edit, quantity buttons
+src/fonts/       our team font
+data/seed.json   starter inventory from the xlsx
+web-demo/        the browser version (what's deployed to GitHub Pages)
+google-apps-script/   the Google Sheets sync script + its setup guide
 ```
+
+It's plain Electron + vanilla JS, no framework or build step. I kept it boring on
+purpose so it's easy to pick up and not a pain to maintain. If you're an AI agent
+or just want the deeper notes, check `CLAUDE.md`.
+
+Questions? Ping me on Discord at [**isabelwu25**](https://discord.com/users/isabelwu25). 🤙

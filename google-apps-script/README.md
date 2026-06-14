@@ -52,8 +52,17 @@ which you'd then have to re-paste into the app.)
   not set to **Anyone**, or you haven't authorized it. Redo step 3.
 - **"Unauthorized: token mismatch"** — the token in the app doesn't match
   `SHARED_TOKEN` in the script.
+- **"Script function not found: doGet"** — the deployed version doesn't contain
+  the script. Paste `Code.gs`, **Save**, then **redeploy a new version**.
+- **Redirects to a school/company login (e.g. a `*.edu` SSO page)** — the script
+  is on a **Google Workspace** account that forces org login. The tell-tale sign
+  is the URL contains your org domain, like
+  `script.google.com/a/macros/your-school.edu/s/…/exec`. Many orgs (incl. USC)
+  block truly-public web apps. **Fix:** deploy from a **personal Gmail account** —
+  its public URL looks like `script.google.com/macros/s/…/exec` (no org domain).
 - **Test the URL** by opening it in a browser — you should see
-  `{"ok":true,"msg":"AUV Inventory sync endpoint is live..."}`.
+  `{"ok":true,"msg":"AUV Inventory sync endpoint is live..."}`. A login page or
+  error means it isn't public yet.
 
 ## Security notes
 - The URL + token let anyone holding them **overwrite** the sheet. Share them
