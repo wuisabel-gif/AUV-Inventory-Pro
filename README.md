@@ -1,9 +1,7 @@
 # AUV Inventory Pro
 
 A desktop app for the Autonomous Underwater Vehicle team's electrical & electronics
-inventory. Built to replace the spreadsheet with fast search, in-place quantity
-editing, low-stock alerts, and a clean underwater-themed UI using the team's
-**ALK Rounded** typeface.
+inventory.
 
 ![AUV Inventory Pro demo](demo.gif)
 
